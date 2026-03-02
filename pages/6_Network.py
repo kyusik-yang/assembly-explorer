@@ -1,6 +1,7 @@
 """Co-sponsorship network page."""
 
 import asyncio
+import networkx as nx
 import pandas as pd
 import streamlit as st
 

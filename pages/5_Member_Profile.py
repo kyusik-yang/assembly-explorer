@@ -31,16 +31,19 @@ def fetch_proposed_bills_bulk(api_key, age, proposer, max_records=1000):
         all_rows = []
         page = 1
         PAGE_SIZE = 100
+        last_total = 0
         async with AssemblyClient(api_key) as c:
             while len(all_rows) < max_records:
                 rows, total = await c.search_bills(
                     age=age, proposer=proposer, page=page, page_size=PAGE_SIZE,
                 )
+                if rows:
+                    last_total = total
                 all_rows.extend(rows)
-                if len(all_rows) >= total or not rows:
+                if len(all_rows) >= last_total or not rows:
                     break
                 page += 1
-        return all_rows, total
+        return all_rows[:max_records], last_total
     return asyncio.run(_run())
 
 

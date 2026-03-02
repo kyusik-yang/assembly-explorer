@@ -54,6 +54,8 @@ with st.sidebar:
         ["(type below)"] + COMMITTEES_22,
         index=0,
     )
+    if age != "22":
+        st.caption("⚠ Preset list is for 22nd Assembly. Committee names may differ for other assemblies — type the name manually.")
     committee_custom = st.text_input(
         "Or type committee name",
         placeholder="예: 법제사법위원회",

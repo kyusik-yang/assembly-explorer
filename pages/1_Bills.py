@@ -155,7 +155,7 @@ if search_btn:
         "RST_PROPOSER": "Lead Proposer", "COMMITTEE": "Committee",
         "PROPOSE_DT": "Date Filed", "PROC_RESULT": "Result",
     }
-    with col_table if "col_chart" in dir() else st.container():
+    with col_table:
         st.dataframe(
             df[display_cols].rename(columns=rename_map),
             use_container_width=True, height=320,

@@ -95,10 +95,9 @@ if search_btn:
     # ── Result expanders with member votes drill-down ─────────────────────────
     for _, row in df.iterrows():
         result = row.get("PROC_RESULT_CD", "")
-        color = "#2ECC71" if "가결" in str(result) else "#E74C3C" if "부결" in str(result) else "#95A5A6"
-        badge = f'<span style="background:{color};color:white;padding:2px 8px;border-radius:4px;font-size:0.8em">{result}</span>'
+        result_label = f"[{result}]" if result else ""
 
-        with st.expander(f"{row.get('BILL_NAME', '—')}  {badge}", unsafe_allow_html=False):
+        with st.expander(f"{row.get('BILL_NAME', '—')}  {result_label}"):
             c1, c2, c3, c4 = st.columns(4)
             c1.metric("Yes 찬성",    int(row.get("YES_TCNT", 0)))
             c2.metric("No 반대",     int(row.get("NO_TCNT", 0)))
