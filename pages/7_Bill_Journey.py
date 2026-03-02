@@ -75,6 +75,12 @@ if search_btn and keyword and not bill_no_input:
         st.warning("No bills found for that keyword.")
         st.stop()
 
+    # Persist results so they survive the on_select rerun
+    st.session_state["journey_search_results"] = (kw_bills, kw_total)
+    st.session_state.pop("journey_selected_bill_no", None)
+
+if "journey_search_results" in st.session_state and not bill_no_input:
+    kw_bills, kw_total = st.session_state["journey_search_results"]
     kdf = pd.DataFrame(kw_bills)
     st.markdown(f"**{kw_total} bills found** — select one to view its journey:")
     display_cols = [c for c in ["BILL_NO", "BILL_NAME", "RST_PROPOSER",
@@ -91,11 +97,16 @@ if search_btn and keyword and not bill_no_input:
     )
     if selected_row and selected_row.get("selection", {}).get("rows"):
         idx = selected_row["selection"]["rows"][0]
-        bill_no_input = kdf.iloc[idx]["BILL_NO"]
-        st.success(f"Selected: {kdf.iloc[idx].get('BILL_NAME', bill_no_input)}")
+        st.session_state["journey_selected_bill_no"] = str(kdf.iloc[idx]["BILL_NO"])
+        st.success(f"Selected: {kdf.iloc[idx].get('BILL_NAME', '')}")
 
 # ── Resolve bill_no ────────────────────────────────────────────────────────────
-bill_no = bill_no_input.strip() if bill_no_input else ""
+# Direct text input takes priority; otherwise use keyword-search selection
+bill_no = (
+    bill_no_input.strip()
+    if bill_no_input.strip()
+    else st.session_state.get("journey_selected_bill_no", "")
+)
 
 if not bill_no:
     st.info(
