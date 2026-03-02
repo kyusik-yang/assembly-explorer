@@ -6,6 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
+from utils import inject_mobile_css
 
 st.set_page_config(
     page_title="Member Profile · Assembly Explorer", page_icon="👤", layout="wide"
@@ -92,6 +93,7 @@ def fetch_vote_history(api_key, member_name, age, n_bills=30):
 
 # ── UI ────────────────────────────────────────────────────────────────────────
 
+inject_mobile_css()
 st.title("👤 Member Profile")
 st.caption(
     "Legislative activity for a single National Assembly member — "
@@ -114,7 +116,7 @@ if not API_KEY:
     st.stop()
 
 if not search_btn:
-    st.info("Enter a member name in the sidebar and click **Search**.")
+    st.info("Enter a member name in the sidebar and click **Search**. (On mobile, tap **>>** at the top left to open the sidebar.)")
     st.stop()
 
 if not name.strip():

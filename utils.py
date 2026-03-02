@@ -3,6 +3,43 @@
 import pandas as pd
 import networkx as nx
 import plotly.graph_objects as go
+import streamlit as st
+
+
+def inject_mobile_css() -> None:
+    """Inject CSS that improves the experience on narrow/mobile screens."""
+    st.markdown("""
+    <style>
+    /* ── Mobile improvements ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+        /* Tighter padding — default Streamlit adds too much whitespace */
+        .block-container {
+            padding-top: 1.5rem !important;
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+        }
+        /* Prevent any horizontal overflow */
+        .main { overflow-x: hidden; }
+        /* Make the sidebar toggle button slightly more prominent */
+        [data-testid="collapsedControl"] {
+            background: rgba(0,0,0,0.06) !important;
+            border-radius: 6px !important;
+            padding: 2px 4px !important;
+        }
+        /* Charts: allow horizontal scroll if needed */
+        .js-plotly-plot, .plotly { overflow-x: auto !important; }
+        /* DataFrames: horizontal scroll */
+        [data-testid="stDataFrame"] { overflow-x: auto !important; }
+        /* Metrics: shrink font slightly so 4-col metrics fit */
+        [data-testid="metric-container"] label {
+            font-size: 0.75rem !important;
+        }
+        [data-testid="metric-container"] [data-testid="stMetricValue"] {
+            font-size: 1.1rem !important;
+        }
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 
 # ── Rice index ─────────────────────────────────────────────────────────────────

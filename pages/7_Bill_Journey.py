@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
-from utils import VOTE_COLORS, journey_figure
+from utils import VOTE_COLORS, journey_figure, inject_mobile_css
 
 st.set_page_config(
     page_title="Bill Journey · Assembly Explorer",
@@ -39,6 +39,7 @@ def fetch_proposers(api_key, bill_id):
     return asyncio.run(_run())
 
 
+inject_mobile_css()
 st.title("🗺️ Bill Journey")
 st.caption(
     "Full legislative timeline for a single bill — "

@@ -6,7 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
-from utils import compute_rice_index
+from utils import compute_rice_index, inject_mobile_css
 
 st.set_page_config(page_title="Bills · Assembly Explorer", page_icon="📜", layout="wide")
 
@@ -74,6 +74,7 @@ def fetch_member_votes(api_key, bill_id, age):
 
 # ── Page ──────────────────────────────────────────────────────────────────────
 
+inject_mobile_css()
 st.title("📜 Bill Search")
 st.caption("Search member-sponsored bills from the 열린국회정보 API in real time.")
 
@@ -322,4 +323,4 @@ if search_btn:
                     except Exception as e:
                         st.error(str(e))
 else:
-    st.info("Set filters in the sidebar and click **Search**.")
+    st.info("Set filters in the sidebar and click **Search**. (On mobile, tap **>>** at the top left to open the sidebar.)")

@@ -6,6 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
+from utils import inject_mobile_css
 
 st.set_page_config(page_title="Committees · Assembly Explorer", page_icon="🏛️", layout="wide")
 
@@ -43,6 +44,7 @@ def fetch_committee(api_key, age, committee, page_size):
     return asyncio.run(_run())
 
 
+inject_mobile_css()
 st.title("🏛️ Committee Explorer")
 st.caption("Browse committee rosters and party composition from the 열린국회정보 API.")
 

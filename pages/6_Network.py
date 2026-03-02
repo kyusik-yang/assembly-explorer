@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
-from utils import build_cosponsor_graph, network_figure
+from utils import build_cosponsor_graph, network_figure, inject_mobile_css
 
 st.set_page_config(
     page_title="Co-sponsorship Network · Assembly Explorer",
@@ -47,6 +47,7 @@ def fetch_all_proposers(api_key, bill_ids: tuple):
     return asyncio.run(_run())
 
 
+inject_mobile_css()
 st.title("🕸️ Co-sponsorship Network")
 st.caption(
     "Visualize the co-sponsorship network for a set of bills — "
@@ -77,7 +78,7 @@ if not API_KEY:
     st.stop()
 
 if not search_btn:
-    st.info("Set filters in the sidebar and click **Build Network**.")
+    st.info("Set filters in the sidebar and click **Build Network**. (On mobile, tap **>>** at the top left to open the sidebar.)")
     st.stop()
 
 # ── Step 1: Fetch bills ────────────────────────────────────────────────────────

@@ -7,7 +7,7 @@ import plotly.express as px
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
-from utils import compute_rice_index
+from utils import compute_rice_index, inject_mobile_css
 
 st.set_page_config(page_title="Votes · Assembly Explorer", page_icon="🗳️", layout="wide")
 
@@ -32,6 +32,7 @@ def fetch_member_votes(api_key, bill_id, age):
     return asyncio.run(_run())
 
 
+inject_mobile_css()
 st.title("🗳️ Plenary Vote Results")
 st.caption("Query bill-level vote tallies from the National Assembly floor.")
 
@@ -163,4 +164,4 @@ if search_btn:
         "text/csv",
     )
 else:
-    st.info("Set filters in the sidebar and click **Search**.")
+    st.info("Set filters in the sidebar and click **Search**. (On mobile, tap **>>** at the top left to open the sidebar.)")

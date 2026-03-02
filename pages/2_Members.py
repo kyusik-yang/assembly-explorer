@@ -6,6 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
+from utils import inject_mobile_css
 
 st.set_page_config(page_title="Members · Assembly Explorer", page_icon="👤", layout="wide")
 
@@ -24,6 +25,7 @@ def fetch_members(api_key, age, name, party, district, committee, page_size):
     return asyncio.run(_run())
 
 
+inject_mobile_css()
 st.title("👤 Assembly Members")
 st.caption("Browse National Assembly member rosters from the 열린국회정보 API.")
 
@@ -121,4 +123,4 @@ if search_btn:
         fig3.update_layout(showlegend=False, height=280)
         st.plotly_chart(fig3, use_container_width=True)
 else:
-    st.info("Set filters in the sidebar and click **Search**.")
+    st.info("Set filters in the sidebar and click **Search**. (On mobile, tap **>>** at the top left to open the sidebar.)")

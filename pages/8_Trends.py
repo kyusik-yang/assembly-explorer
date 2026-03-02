@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
+from utils import inject_mobile_css
 
 st.set_page_config(page_title="Trends · Assembly Explorer", page_icon="📈", layout="wide")
 
@@ -39,6 +40,7 @@ def fetch_bills_sample(api_key: str, age: str, keyword: str, page_size: int = 10
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 
+inject_mobile_css()
 st.title("📈 Bill Trends")
 st.caption("Compare bill volumes across assemblies and trace how policy topics rise and fall over time.")
 

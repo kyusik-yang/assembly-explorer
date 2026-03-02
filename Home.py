@@ -1,6 +1,7 @@
 """Home page — Korean National Assembly Explorer."""
 
 import streamlit as st
+from utils import inject_mobile_css
 
 st.set_page_config(
     page_title="Assembly Explorer",
@@ -9,6 +10,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+inject_mobile_css()
 st.title("🏛️ Korean National Assembly Explorer")
 st.subheader("Explore Korean legislative data powered by 열린국회정보 Open API")
 
