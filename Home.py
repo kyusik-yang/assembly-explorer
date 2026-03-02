@@ -59,6 +59,25 @@ with col5:
     )
     st.page_link("pages/5_Member_Profile.py", label="View Profile →", icon="🔍")
 
+st.markdown("")
+col6, col7, _ = st.columns(3)
+
+with col6:
+    st.markdown("### 🕸️ Co-sponsorship Network")
+    st.markdown(
+        "Visualize the co-sponsorship network for a set of bills. "
+        "See who legislates together and how coalitions cluster by party."
+    )
+    st.page_link("pages/6_Network.py", label="View Network →", icon="🕸️")
+
+with col7:
+    st.markdown("### 🗺️ Bill Journey")
+    st.markdown(
+        "Full legislative timeline for a single bill — filing, committee review, "
+        "plenary vote, and promulgation with exact dates."
+    )
+    st.page_link("pages/7_Bill_Journey.py", label="View Journey →", icon="🗺️")
+
 st.markdown("---")
 
 with st.expander("What is this?", expanded=True):

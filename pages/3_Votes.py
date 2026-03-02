@@ -7,6 +7,7 @@ import plotly.express as px
 import streamlit as st
 
 from client import AGE_OPTIONS, AssemblyClient
+from utils import compute_rice_index
 
 st.set_page_config(page_title="Votes · Assembly Explorer", page_icon="🗳️", layout="wide")
 
@@ -141,6 +142,15 @@ if search_btn:
                                 fig_v.update_layout(margin=dict(t=40, b=80))
                                 fig_v.update_xaxes(tickangle=-30)
                                 st.plotly_chart(fig_v, use_container_width=True)
+                            # Rice index
+                            if "POLY_NM" in vdf.columns and "RESULT_VOTE_MOD" in vdf.columns:
+                                rice_df = compute_rice_index(vdf)
+                                with st.expander("Party cohesion (Rice index)"):
+                                    st.dataframe(rice_df, use_container_width=True, hide_index=True)
+                                    st.caption(
+                                        "Rice index = |Yea − Nay| / (Yea + Nay) × 100. "
+                                        "100 = unanimous, 0 = perfectly split."
+                                    )
                         else:
                             st.caption("No individual vote records for this bill.")
                     except Exception as e:
