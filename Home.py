@@ -60,7 +60,7 @@ with col5:
     st.page_link("pages/5_Member_Profile.py", label="View Profile →", icon="🔍")
 
 st.markdown("")
-col6, col7, _ = st.columns(3)
+col6, col7, col8 = st.columns(3)
 
 with col6:
     st.markdown("### 🕸️ Co-sponsorship Network")
@@ -77,6 +77,14 @@ with col7:
         "plenary vote, and promulgation with exact dates."
     )
     st.page_link("pages/7_Bill_Journey.py", label="View Journey →", icon="🗺️")
+
+with col8:
+    st.markdown("### 📈 Trends")
+    st.markdown(
+        "Compare bill volumes for keywords across multiple assemblies. "
+        "Track how policy topics rise and fall over time."
+    )
+    st.page_link("pages/8_Trends.py", label="View Trends →", icon="📈")
 
 st.markdown("---")
 
