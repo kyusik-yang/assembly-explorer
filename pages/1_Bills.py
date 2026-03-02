@@ -169,10 +169,12 @@ if search_btn:
     ):
         col_opt, col_btn = st.columns([2, 1])
         with col_opt:
+            _dl_opts = [100, 300, 500, 1000, 3000, 5000]
+            _dl_default = 500 if total >= 500 else next(o for o in _dl_opts if o >= total)
             max_dl = st.select_slider(
                 "Max records to collect",
-                options=[100, 300, 500, 1000, 3000, 5000],
-                value=min(500, total),
+                options=_dl_opts,
+                value=_dl_default,
             )
             if total > max_dl:
                 st.caption(f"Will collect the first {max_dl:,} of {total:,} results.")
