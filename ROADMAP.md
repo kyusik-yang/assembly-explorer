@@ -21,11 +21,13 @@ Priority levels: 🔴 High / 🟡 Medium / 🟢 Nice-to-have
 
 ## Features — Bills page
 
-- 🔴 **Pagination**: currently only returns first N results — add "Load more" button or page selector
+- ✅ **Pagination info**: shows "X of N total" with note to increase page size
+- ✅ **Filter by date range**: `propose_dt_from` / `propose_dt_to` (YYYYMMDD)
+- ✅ **Member votes tab**: per-member vote breakdown (party bar chart + table) inside bill detail section
+- ✅ **Assembly 16th/17th**: age selector now includes 16/17
+- ✅ **Bulk export**: auto-paginate all results up to 5,000 records with progress; CSV download
 - 🔴 **Timeline chart**: bar chart of bills filed by month/year to show legislative activity over time
-- 🟡 **Co-sponsor network graph**: visualize the co-sponsorship network using `pyvis` or `networkx` + Plotly (who co-sponsors with whom, cluster by party)
-- 🟡 **Bill detail modal**: instead of an expander at the bottom, open a right-side panel or modal with full bill info
-- 🟡 **Filter by date range**: add a date picker for PROPOSE_DT
+- 🟡 **Co-sponsor network graph**: visualize the co-sponsorship network using `pyvis` or `networkx` + Plotly
 - 🟢 **Export to Excel** (`.xlsx`) in addition to CSV, with auto-formatted columns
 - 🟢 **Bookmark/share URL**: encode current filter state in the URL so a search can be shared as a link
 
@@ -33,7 +35,10 @@ Priority levels: 🔴 High / 🟡 Medium / 🟢 Nice-to-have
 
 ## Features — Members page
 
-- 🔴 **Member profile click-through**: click a member's name → see all bills they've proposed + their vote record
+- ✅ **Total count display**: shows "X of N total" with overflow notice
+- ✅ **Assembly 16th/17th**: age selector now includes 16/17
+- ✅ **Member Profile page** (`5_Member_Profile.py`): bills proposed (auto-paginated + bulk CSV) + recent vote record (parallel fetch, 30 bills)
+- 🟡 **Member profile click-through**: click a member name in the roster → redirect to profile page
 - 🟡 **Cross-assembly seat comparison**: bar chart comparing party seat counts across 20th/21st/22nd assemblies side by side
 - 🟡 **Gender breakdown chart**: currently a column in the table but not visualized
 - 🟢 **District map**: if GeoJSON data is available, show a choropleth of seats by region
@@ -42,7 +47,9 @@ Priority levels: 🔴 High / 🟡 Medium / 🟢 Nice-to-have
 
 ## Features — Votes page
 
-- 🔴 **Party-level vote breakdown**: beyond total yes/no/abstain, show how each party voted (requires individual vote API if available)
+- ✅ **Party-level vote breakdown**: per-member votes grouped by party, rendered as grouped bar chart inside each bill expander
+- ✅ **Total count display**: shows "X of N total"
+- ✅ **Assembly 16th/17th**: age selector now includes 16/17
 - 🟡 **Pass rate over time**: line chart showing monthly/annual bill pass rates for a given assembly
 - 🟡 **Controversial bill detector**: highlight bills where yes/no margin was narrow (e.g., < 10 votes)
 - 🟢 **Vote comparison across assemblies**: same bill topic searched across multiple assemblies
@@ -51,7 +58,7 @@ Priority levels: 🔴 High / 🟡 Medium / 🟢 Nice-to-have
 
 ## Features — New pages to add
 
-- 🔴 **Committee Explorer**: dedicated page for `get_committee_members` — browse any committee, see its composition and bills referred to it
+- ✅ **Committee Explorer** (`4_Committee.py`): browse any committee, see party composition pie/stats and member roster
 - 🟡 **Bill Journey**: enter a bill number → see the full timeline from filing → committee review → plenary vote, displayed as a horizontal flowchart
 - 🟡 **About / How to Use**: a proper help page explaining each tool, API key setup, and link to the MCP repo and tutorial
 
@@ -59,7 +66,10 @@ Priority levels: 🔴 High / 🟡 Medium / 🟢 Nice-to-have
 
 ## Technical
 
-- 🔴 **`@st.cache_data` caching**: wrap all API calls with Streamlit's cache decorator (TTL ~1 hour) to reduce redundant API calls and speed up the app
+- ✅ **`@st.cache_data` caching**: all API calls wrapped with TTL=1h cache
+- ✅ **Tuple return from client**: `_parse()` returns `(rows, total_count)` for pagination metadata
+- ✅ **`get_member_votes` in client**: new method for `nojepdqqaweusdfbi` endpoint
+- ✅ **Date filter in `search_bills`**: `STR_DT` / `END_DT` params
 - 🟡 **Async-native**: Streamlit 1.41+ supports `async` natively — remove `asyncio.run()` wrappers
 - 🟡 **Error messages**: improve user-facing error messages (distinguish between "no results", "API key error", "network timeout")
 - 🟢 **Unit tests for the client**: add a small test suite that mocks API responses
