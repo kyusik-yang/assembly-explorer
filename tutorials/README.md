@@ -5,7 +5,7 @@ Tutorials have moved to the unified tutorial site:
 **[assembly-tutorial](https://github.com/kyusik-yang/assembly-tutorial)** - comprehensive guide covering:
 
 - Open Assembly API (Python, R, MCP)
-- `kna` CLI for the master database (115K bills of the 17th-22nd, 2.56M roll-call votes and ideal points of the 20th-22nd)
+- `kna` CLI for the master database (115K bills and 4.1M roll-call votes of the 17th-22nd, ideal points of the 20th-22nd)
 - Voting behavior and party discipline (Rice index)
 - Co-sponsorship network analysis
 
